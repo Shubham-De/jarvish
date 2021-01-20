@@ -5,6 +5,8 @@ import wikipedia #pip install wikipedia
 import webbrowser
 import os
 import smtplib
+import weather_forecast as wf #pip install weather_forecast 
+import random
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -58,6 +60,18 @@ def sendEmail(to, content):
     server.sendmail('youremail@gmail.com', to, content)
     server.close()
 
+def joke():
+    jokes = ["Can a kangaroo jump higher than a house? . Of course, a house doesn’t jump at all.", "Doctor: You're obese. Patient: For that I definitely want a second opinion. Doctor: You’re quite ugly, too."
+    , "What did one traffic light say to the other?. Stop looking! I am changing!", "What do you call bears with no ears?, B."
+    , "Why do French people eat snails? They don't like fast food!", "What's red and moves up and down? A tomato in an elevator!"
+    , "I have many jokes about unemployed people, sadly none of them work.", "What do you call a singing laptop? A Dell!"
+    , "Why was six afraid of seven? Because seven ate nine.", "Why are skeletons so calm? Because nothing gets under their skin."
+    , "How do trees get online? They just log on!"]
+
+    rand_jokes = random.choice(jokes)
+    print(rand_jokes)
+    speak(rand_jokes)
+
 if __name__ == "__main__":
     wishMe()
     while True:
@@ -107,4 +121,18 @@ if __name__ == "__main__":
             except Exception as e:
                 print(e)
                 speak("Sorry the email wasn't send")
+
+        elif 'weather' in query:
+            a = datetime.datetime.now().strftime("%H:%M:%S") 
+            print(f"Current Time: {a}\n")
+
+            b = wf.forecast(place = "Kathmandu" , time=a , date="2021-01-20" , forecast="daily")
+            speak(f"Sir, the weather forcast of current time {b} is listed below")
+            print(b)
+
+        elif 'tell me a joke' in query:
+            joke()
+            
+                
                
+      
