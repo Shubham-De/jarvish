@@ -133,6 +133,9 @@ if __name__ == "__main__":
         elif 'tell me a joke' in query:
             joke()
             
+        elif 'stop listening' in query:
+            break
+            
                 
                
       
